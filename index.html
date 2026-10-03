@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DigiBro — Student-Led Digital Agency | Web, Marketplaces, Social & SEO</title>
+<meta name="description" content="DigiBro is a student-led digital agency offering budget-friendly websites, e-commerce setup, marketplace onboarding, social media content & SEO. 48-hour delivery. 50% milestone payments." />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#6366F1;
+    --cyan:#06B6D4;
+  }
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Inter', system-ui, -apple-system, sans-serif; background:#020617; color:#e2e8f0; overflow-x:hidden; }
+  .font-display{ font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif; }
+  ::selection{ background:#6366F1; color:white; }
+  ::-webkit-scrollbar{ width:10px; }
+  ::-webkit-scrollbar-track{ background:#020617; }
+  ::-webkit-scrollbar-thumb{ background:linear-gradient(180deg,#6366F1,#06B6D4); border-radius:99px; }
+
+  .glass{ background:rgba(15,23,42,.6); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(148,163,184,.12); }
+  .glass-strong{ background:rgba(2,6,23,.82); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); }
+  .gradient-text{ background:linear-gradient(92deg,#818cf8 0%,#22d3ee 55%,#a5b4fc 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .gradient-bg{ background:linear-gradient(135deg,#6366F1 0%,#4f46e5 40%,#06B6D4 100%); }
+  .gradient-border{ position:relative; }
+  .gradient-border::before{ content:""; position:absolute; inset:0; border-radius:inherit; padding:1.5px; background:linear-gradient(135deg,rgba(99,102,241,.7),rgba(6,182,212,.5),rgba(99,102,241,.2)); -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+
+  .grid-bg{
+    background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(ellipse 80% 70% at 50% 20%,black 40%,transparent 100%);
+    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 20%,black 40%,transparent 100%);
+  }
+  .orb{ position:absolute; border-radius:9999px; filter:blur(90px); opacity:.45; pointer-events:none; }
+  .noise::after{ content:""; position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"); pointer-events:none; }
+
+  @keyframes floaty{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-14px) } }
+  @keyframes pulse-glow{ 0%,100%{ box-shadow:0 0 0 0 rgba(34,211,238,.45),0 0 32px rgba(99,102,241,.35)} 50%{ box-shadow:0 0 0 12px rgba(34,211,238,0),0 0 56px rgba(99,102,241,.55)} }
+  @keyframes marquee{ from{ transform:translateX(0)} to{ transform:translateX(-50%)} }
+  @keyframes spin-slow{ to{ transform:rotate(360deg)} }
+  @keyframes shimmer{ 0%{ background-position:-200% 0 } 100%{ background-position:200% 0 } }
+  .animate-floaty{ animation:floaty 6s ease-in-out infinite; }
+  .animate-marquee{ animation:marquee 28s linear infinite; }
+  .animate-marquee:hover{ animation-play-state:paused; }
+  .whatsapp-pulse{ animation:pulse-glow 2.4s ease-in-out infinite; }
+
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+  .reveal-delay-1{ transition-delay:.1s } .reveal-delay-2{ transition-delay:.2s } .reveal-delay-3{ transition-delay:.3s } .reveal-delay-4{ transition-delay:.4s }
+
+  .tab-btn{ transition:all .3s ease; }
+  .tab-btn.active{ background:linear-gradient(135deg,#6366F1,#06B6D4); color:white; border-color:transparent; box-shadow:0 8px 28px -6px rgba(99,102,241,.55); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:grid; animation:fadeUp .45s cubic-bezier(.22,1,.36,1); }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px)} to{ opacity:1; transform:translateY(0)} }
+
+  .faq-answer{ max-height:0; overflow:hidden; transition:max-height .45s cubic-bezier(.22,1,.36,1); }
+  .faq-item.open .faq-answer{ max-height:320px; }
+  .faq-item.open .faq-chevron{ transform:rotate(180deg); }
+  .faq-chevron{ transition:transform .35s ease; }
+  .faq-item.open{ border-color:rgba(99,102,241,.45); background:rgba(30,41,59,.6); }
+
+  .card-hover{ transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s; }
+  .card-hover:hover{ transform:translateY(-6px); border-color:rgba(99,102,241,.4); box-shadow:0 24px 60px -18px rgba(99,102,241,.35); }
+
+  .btn-primary{ background:linear-gradient(135deg,#6366F1 0%,#4f46e5 45%,#06B6D4 130%); transition:all .3s ease; box-shadow:0 10px 32px -8px rgba(99,102,241,.6); }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 18px 44px -8px rgba(99,102,241,.7); filter:brightness(1.08); }
+  .btn-primary:active{ transform:translateY(0); }
+  .btn-whatsapp{ background:linear-gradient(135deg,#16a34a,#15803d); box-shadow:0 10px 32px -8px rgba(34,197,94,.5); transition:all .3s ease; }
+  .btn-whatsapp:hover{ transform:translateY(-2px); filter:brightness(1.1); box-shadow:0 18px 44px -8px rgba(34,197,94,.6); }
+
+  .nav-link{ position:relative; transition:color .25s; }
+  .nav-link::after{ content:""; position:absolute; left:0; bottom:-4px; height:2px; width:0; background:linear-gradient(90deg,#6366F1,#06B6D4); border-radius:99px; transition:width .3s ease; }
+  .nav-link:hover::after,.nav-link.active::after{ width:100%; }
+  .nav-link.active{ color:white; }
+
+  #mobileMenu{ transition:opacity .3s ease,transform .3s ease; }
+  #mobileMenu.hidden-menu{ opacity:0; transform:translateY(-12px); pointer-events:none; }
+
+  .shimmer-line{ background:linear-gradient(90deg,transparent,rgba(34,211,238,.5),transparent); background-size:200% 100%; animation:shimmer 3s linear infinite; }
+
+  input,select,textarea{ color-scheme:dark; }
+  input:focus,select:focus,textarea:focus{ outline:none; border-color:#6366F1 !important; box-shadow:0 0 0 3px rgba(99,102,241,.18); }
+
+  .step-line{ background:linear-gradient(90deg,rgba(99,102,241,.0),rgba(99,102,241,.5),rgba(6,182,212,.5),rgba(99,102,241,0)); }
+
+  #toast{ transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .4s; }
+
+  @media (max-width:640px){ .orb{ filter:blur(60px); opacity:.35; } }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ═══════════ TOP ANNOUNCEMENT ═══════════ -->
+<div class="relative z-[60] bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 text-white text-center text-[12px] sm:text-[13px] font-semibold tracking-wide py-2 px-4">
+  <span class="inline-flex items-center gap-2 flex-wrap justify-center">
+    <span class="hidden sm:inline-flex items-center gap-1 bg-white/20 rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider"><i data-lucide="zap" class="w-3 h-3"></i> Limited slots</span>
+    <span>Festive Offer — Flat 10% off on all Website + Marketplace bundles. Valid this month.</span>
+    <a href="#pricing" class="underline underline-offset-2 hover:text-indigo-100 font-bold">Claim now →</a>
+  </span>
+</div>
+
+<!-- ═══════════ 1. NAVIGATION ═══════════ -->
+<header id="navbar" class="sticky top-0 z-50 backdrop-blur-lg bg-slate-950/80 border-b border-slate-800/80 transition-all duration-300">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-[72px]">
+      <!-- Logo -->
+      <a href="#home" class="flex items-center gap-2.5 group">
+        <span class="relative flex items-center justify-center w-9 h-9 rounded-xl gradient-bg shadow-lg shadow-indigo-500/30 group-hover:shadow-cyan-500/40 transition-shadow">
+          <i data-lucide="terminal" class="w-5 h-5 text-white"></i>
+          <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-cyan-400 border-2 border-slate-950 shadow-[0_0_12px_rgba(34,211,238,.9)]"></span>
+        </span>
+        <span class="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-white">Digi<span class="gradient-text">Bro</span></span>
+      </a>
+      <!-- Desktop links -->
+      <div class="hidden lg:flex items-center gap-8 text-[14px] font-medium text-slate-400">
+        <a href="#home" class="nav-link hover:text-white" data-nav="home">Home</a>
+        <a href="#services" class="nav-link hover:text-white" data-nav="services">Services</a>
+        <a href="#pricing" class="nav-link hover:text-white" data-nav="pricing">Pricing</a>
+        <a href="#process" class="nav-link hover:text-white" data-nav="process">Process</a>
+        <a href="#faq" class="nav-link hover:text-white" data-nav="faq">FAQ</a>
+        <a href="#contact" class="nav-link hover:text-white" data-nav="contact">Contact</a>
+      </div>
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white border border-slate-700/80 hover:border-cyan-400/50 rounded-full px-4 py-2 transition-all">
+          <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i> +91 81789 03816
+        </a>
+        <a href="#contact" class="btn-primary inline-flex items-center gap-2 text-sm font-bold text-white rounded-full px-5 py-2.5">
+          Get Started <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+      <!-- Hamburger -->
+      <button id="hamburger" aria-label="Toggle menu" class="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-700/80 text-slate-200 hover:border-indigo-500/60 transition-colors">
+        <i data-lucide="menu" class="w-5 h-5" id="iconOpen"></i>
+        <i data-lucide="x" class="w-5 h-5 hidden" id="iconClose"></i>
+      </button>
+    </div>
+  </nav>
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden-menu lg:hidden absolute top-full left-0 right-0 glass-strong border-b border-slate-800 opacity-0">
+    <div class="px-5 py-5 space-y-1 text-[15px] font-medium">
+      <a href="#home" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800/70 transition"><i data-lucide="home" class="w-4 h-4 text-indigo-400"></i> Home</a>
+      <a href="#services" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800/70 transition"><i data-lucide="layers" class="w-4 h-4 text-indigo-400"></i> Services</a>
+      <a href="#pricing" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800/70 transition"><i data-lucide="tag" class="w-4 h-4 text-indigo-400"></i> Pricing</a>
+      <a href="#process" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800/70 transition"><i data-lucide="workflow" class="w-4 h-4 text-indigo-400"></i> Process</a>
+      <a href="#faq" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800/70 transition"><i data-lucide="help-circle" class="w-4 h-4 text-indigo-400"></i> FAQ</a>
+      <a href="#contact" class="mobile-link flex items-center gap-3 px-4 py-3 rounded-xl text-slate-200 hover:bg-slate-800/70 transition"><i data-lucide="mail" class="w-4 h-4 text-indigo-400"></i> Contact</a>
+      <div class="pt-3 grid grid-cols-2 gap-3">
+        <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20want%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="btn-whatsapp inline-flex items-center justify-center gap-2 text-sm font-bold text-white rounded-xl px-4 py-3"><i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp</a>
+        <a href="#contact" class="mobile-link btn-primary inline-flex items-center justify-center gap-2 text-sm font-bold text-white rounded-xl px-4 py-3">Get Started</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ 2. HERO ═══════════ -->
+<section id="home" class="relative overflow-hidden noise">
+  <div class="absolute inset-0 grid-bg"></div>
+  <div class="orb w-[420px] h-[420px] bg-indigo-600/60 -top-32 -left-32"></div>
+  <div class="orb w-[380px] h-[380px] bg-cyan-500/40 top-10 right-[-120px]"></div>
+  <div class="orb w-[300px] h-[300px] bg-fuchsia-600/25 bottom-[-120px] left-1/3"></div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-px shimmer-line"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-24 pb-14 lg:pb-20">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+      <!-- Left -->
+      <div class="text-center lg:text-left">
+        <div class="reveal inline-flex items-center gap-2 glass rounded-full pl-1.5 pr-4 py-1.5 text-[12px] sm:text-[13px] font-semibold text-slate-300 mb-6">
+          <span class="inline-flex items-center gap-1 gradient-bg text-white text-[11px] font-bold rounded-full px-2.5 py-1 uppercase tracking-wider"><span class="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span> Accepting projects</span>
+          Student-Led Digital Agency • India
+        </div>
+        <h1 class="reveal reveal-delay-1 font-display font-black tracking-tight text-white text-[34px] leading-[1.08] sm:text-5xl lg:text-[58px]">
+          Big-Agency Results.<br />
+          <span class="gradient-text">Student-Friendly</span> Prices.
+        </h1>
+        <p class="reveal reveal-delay-2 mt-5 text-slate-400 text-[15px] sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+          DigiBro builds <span class="text-slate-200 font-semibold">websites, online stores, marketplace listings & content</span> for startups, sellers and college fests — with premium quality, fast turnaround and <span class="text-slate-200 font-semibold">zero-headache execution.</span>
+        </p>
+        <div class="reveal reveal-delay-3 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
+          <a href="#pricing" class="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 font-bold text-white rounded-2xl px-7 py-4 text-[15px]">
+            <i data-lucide="package" class="w-5 h-5"></i> Explore Packages
+          </a>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20want%20a%20free%20quote%20for%20my%20project." target="_blank" rel="noopener" class="btn-whatsapp w-full sm:w-auto inline-flex items-center justify-center gap-2 font-bold text-white rounded-2xl px-7 py-4 text-[15px]">
+            <i data-lucide="message-circle" class="w-5 h-5"></i> Chat on WhatsApp
+          </a>
+        </div>
+        <!-- Trust badges -->
+        <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+          <span class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-[12.5px] font-semibold text-slate-200"><i data-lucide="wallet" class="w-4 h-4 text-cyan-300"></i> 100% Student-Friendly Rates</span>
+          <span class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-[12.5px] font-semibold text-slate-200"><i data-lucide="timer" class="w-4 h-4 text-indigo-300"></i> 48-Hour Fast Delivery Options</span>
+          <span class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-[12.5px] font-semibold text-slate-200"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-300"></i> 50% Advance Milestone Payment</span>
+        </div>
+        <!-- Stats -->
+        <div class="mt-9 grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0">
+          <div class="glass rounded-2xl px-3 py-4 text-center">
+            <p class="font-display font-extrabold text-2xl sm:text-3xl text-white"><span class="counter" data-target="50">0</span>+</p>
+            <p class="text-[11px] sm:text-xs text-slate-400 font-medium mt-1">Projects Delivered</p>
+          </div>
+          <div class="glass rounded-2xl px-3 py-4 text-center">
+            <p class="font-display font-extrabold text-2xl sm:text-3xl text-white flex items-center justify-center gap-1">4.9 <i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i></p>
+            <p class="text-[11px] sm:text-xs text-slate-400 font-medium mt-1">Client Rating</p>
+          </div>
+          <div class="glass rounded-2xl px-3 py-4 text-center">
+            <p class="font-display font-extrabold text-2xl sm:text-3xl text-white"><span class="counter" data-target="48">0</span>h</p>
+            <p class="text-[11px] sm:text-xs text-slate-400 font-medium mt-1">Express Delivery</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right visual -->
+      <div class="reveal reveal-delay-2 relative hidden md:block">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="w-[380px] h-[380px] rounded-full border border-indigo-500/20" style="animation:spin-slow 30s linear infinite"></div>
+          <div class="absolute w-[300px] h-[300px] rounded-full border border-dashed border-cyan-400/20" style="animation:spin-slow 22s linear infinite reverse"></div>
+        </div>
+        <div class="relative glass gradient-border rounded-3xl p-6 sm:p-7 shadow-2xl shadow-indigo-950/60 max-w-[440px] mx-auto">
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center"><i data-lucide="rocket" class="w-5 h-5 text-white"></i></span>
+              <div>
+                <p class="text-white font-bold text-sm">Project Dashboard</p>
+                <p class="text-slate-400 text-xs">Live delivery tracking</p>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold rounded-full px-3 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> On track</span>
+          </div>
+          <!-- progress rows -->
+          <div class="space-y-3.5">
+            <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-4">
+              <div class="flex justify-between items-center mb-2.5">
+                <span class="text-sm font-semibold text-slate-200 flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-indigo-400"></i> Business Website</span>
+                <span class="text-xs font-bold text-cyan-300">Day 3 / 5</span>
+              </div>
+              <div class="h-2 rounded-full bg-slate-700/60 overflow-hidden"><div class="h-full w-[72%] rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400"></div></div>
+            </div>
+            <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-4">
+              <div class="flex justify-between items-center mb-2.5">
+                <span class="text-sm font-semibold text-slate-200 flex items-center gap-2"><i data-lucide="shopping-bag" class="w-4 h-4 text-amber-400"></i> Amazon Onboarding</span>
+                <span class="text-xs font-bold text-emerald-300">Listed ✓</span>
+              </div>
+              <div class="h-2 rounded-full bg-slate-700/60 overflow-hidden"><div class="h-full w-[100%] rounded-full bg-gradient-to-r from-emerald-500 to-teal-400"></div></div>
+            </div>
+            <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-4">
+              <div class="flex justify-between items-center mb-2.5">
+                <span class="text-sm font-semibold text-slate-200 flex items-center gap-2"><i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i> Fest Promo Pack</span>
+                <span class="text-xs font-bold text-cyan-300">Day 1 / 2</span>
+              </div>
+              <div class="h-2 rounded-full bg-slate-700/60 overflow-hidden"><div class="h-full w-[45%] rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-400"></div></div>
+            </div>
+          </div>
+          <div class="mt-5 flex items-center justify-between bg-gradient-to-r from-indigo-600/25 to-cyan-500/15 border border-indigo-500/25 rounded-2xl px-4 py-3.5">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="badge-check" class="w-5 h-5 text-cyan-300"></i>
+              <p class="text-[13px] font-semibold text-slate-200">Milestone secured <span class="text-slate-400 font-normal">• 50% advance done</span></p>
+            </div>
+            <i data-lucide="lock" class="w-4 h-4 text-slate-500"></i>
+          </div>
+        </div>
+        <!-- Floating cards -->
+        <div class="animate-floaty absolute -left-4 lg:-left-10 top-8 glass rounded-2xl px-4 py-3 flex items-center gap-2.5 shadow-xl">
+          <span class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center"><i data-lucide="banknote" class="w-4.5 h-4.5 text-emerald-300"></i></span>
+          <div><p class="text-white text-sm font-bold leading-none">₹1,000+</p><p class="text-slate-400 text-[11px] mt-1">starting price</p></div>
+        </div>
+        <div class="animate-floaty absolute -right-2 lg:-right-6 bottom-10 glass rounded-2xl px-4 py-3 flex items-center gap-2.5 shadow-xl" style="animation-delay:1.4s">
+          <span class="w-9 h-9 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center"><i data-lucide="alarm-clock" class="w-4.5 h-4.5 text-indigo-300"></i></span>
+          <div><p class="text-white text-sm font-bold leading-none">24–48 hrs</p><p class="text-slate-400 text-[11px] mt-1">portfolio delivery</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marquee -->
+    <div class="mt-14 lg:mt-16 reveal">
+      <p class="text-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">We build & manage on your favourite platforms</p>
+      <div class="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
+        <div class="animate-marquee flex items-center gap-3 w-max">
+          <!-- set 1 -->
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="shopping-cart" class="w-4 h-4 text-cyan-300"></i> Shopify</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="store" class="w-4 h-4 text-indigo-300"></i> WooCommerce</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="package" class="w-4 h-4 text-amber-300"></i> Amazon Seller</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="shopping-bag" class="w-4 h-4 text-sky-300"></i> Flipkart Hub</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i> Instagram</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-emerald-300"></i> Google Business</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="target" class="w-4 h-4 text-fuchsia-300"></i> Meta Ads</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="search" class="w-4 h-4 text-cyan-300"></i> Google Ads & SEO</span>
+          <!-- set 2 duplicate -->
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="shopping-cart" class="w-4 h-4 text-cyan-300"></i> Shopify</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="store" class="w-4 h-4 text-indigo-300"></i> WooCommerce</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="package" class="w-4 h-4 text-amber-300"></i> Amazon Seller</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="shopping-bag" class="w-4 h-4 text-sky-300"></i> Flipkart Hub</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i> Instagram</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-emerald-300"></i> Google Business</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="target" class="w-4 h-4 text-fuchsia-300"></i> Meta Ads</span>
+          <span class="glass rounded-full px-5 py-2.5 text-sm font-semibold text-slate-300 inline-flex items-center gap-2"><i data-lucide="search" class="w-4 h-4 text-cyan-300"></i> Google Ads & SEO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 3. CORE ADVANTAGES ═══════════ -->
+<section id="services" class="relative py-16 sm:py-20 lg:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.18em] text-cyan-300 bg-cyan-400/10 border border-cyan-400/20 rounded-full px-4 py-1.5 mb-4"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Why DigiBro</p>
+      <h2 class="font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-[44px] tracking-tight leading-tight">Everything you need to grow, <span class="gradient-text">under one roof.</span></h2>
+      <p class="mt-4 text-slate-400 text-[15px] sm:text-base leading-relaxed">No freelancers disappearing mid-project. No agency-level invoices. Just a hungry student team that ships fast and communicates clearly.</p>
+    </div>
+
+    <div class="mt-10 lg:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      <div class="reveal card-hover glass rounded-3xl p-6 sm:p-7">
+        <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center shadow-lg shadow-indigo-500/30 mb-5"><i data-lucide="wallet" class="w-6 h-6 text-white"></i></span>
+        <h3 class="font-display font-bold text-white text-lg">Budget-Calibrated Pricing</h3>
+        <p class="mt-2 text-sm text-slate-400 leading-relaxed">Fixed quotes upfront. Zero hidden costs, zero surprise "extra charges" — built for student & startup budgets.</p>
+        <p class="mt-4 text-[13px] font-bold text-cyan-300 flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Starting at just ₹1,000</p>
+      </div>
+      <div class="reveal reveal-delay-1 card-hover glass rounded-3xl p-6 sm:p-7">
+        <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-sky-700 flex items-center justify-center shadow-lg shadow-cyan-500/30 mb-5"><i data-lucide="layers" class="w-6 h-6 text-white"></i></span>
+        <h3 class="font-display font-bold text-white text-lg">Full-Stack Execution</h3>
+        <p class="mt-2 text-sm text-slate-400 leading-relaxed">Web, content, marketplaces & SEO — one team, one WhatsApp thread, one point of accountability.</p>
+        <p class="mt-4 text-[13px] font-bold text-cyan-300 flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4"></i> 13+ services, 1 partner</p>
+      </div>
+      <div class="reveal reveal-delay-2 card-hover glass rounded-3xl p-6 sm:p-7">
+        <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-500 to-purple-700 flex items-center justify-center shadow-lg shadow-fuchsia-500/30 mb-5"><i data-lucide="zap" class="w-6 h-6 text-white"></i></span>
+        <h3 class="font-display font-bold text-white text-lg">Rapid Turnaround</h3>
+        <p class="mt-2 text-sm text-slate-400 leading-relaxed">Agile sprints with daily updates. Portfolio sites in 24–48 hours, stores live in under a week.</p>
+        <p class="mt-4 text-[13px] font-bold text-cyan-300 flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Express slots available</p>
+      </div>
+      <div class="reveal reveal-delay-3 card-hover glass rounded-3xl p-6 sm:p-7">
+        <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center shadow-lg shadow-emerald-500/30 mb-5"><i data-lucide="shield-check" class="w-6 h-6 text-white"></i></span>
+        <h3 class="font-display font-bold text-white text-lg">Milestone Security</h3>
+        <p class="mt-2 text-sm text-slate-400 leading-relaxed">Pay 50% to start, 50% only on final handover. Your money is safe until you're fully satisfied.</p>
+        <p class="mt-4 text-[13px] font-bold text-cyan-300 flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4"></i> 100% handover guarantee</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4. SERVICES & PRICING (TABS) ═══════════ -->
+<section id="pricing" class="relative py-16 sm:py-20 lg:py-24 bg-slate-950/60 border-y border-slate-800/60 overflow-hidden">
+  <div class="orb w-[420px] h-[420px] bg-indigo-700/30 top-[-160px] right-[-140px]"></div>
+  <div class="orb w-[340px] h-[340px] bg-cyan-600/20 bottom-[-140px] left-[-120px]"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.18em] text-indigo-300 bg-indigo-500/10 border border-indigo-400/20 rounded-full px-4 py-1.5 mb-4"><i data-lucide="tag" class="w-3.5 h-3.5"></i> Fixed, transparent pricing</p>
+      <h2 class="font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-[44px] tracking-tight leading-tight">Pick a pack. <span class="gradient-text">Know the exact price.</span></h2>
+      <p class="mt-4 text-slate-400 text-[15px] sm:text-base">No "DM for price". Every service below has fixed pricing and a committed delivery timeline.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="reveal mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-3" role="tablist">
+      <button class="tab-btn active inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/60 px-4 sm:px-5 py-2.5 sm:py-3 text-[13px] sm:text-sm font-bold text-slate-300" data-tab="web" role="tab"><i data-lucide="globe" class="w-4 h-4"></i> Web & E-Commerce</button>
+      <button class="tab-btn inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/60 px-4 sm:px-5 py-2.5 sm:py-3 text-[13px] sm:text-sm font-bold text-slate-300" data-tab="market" role="tab"><i data-lucide="shopping-bag" class="w-4 h-4"></i> Marketplace Onboarding</button>
+      <button class="tab-btn inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/60 px-4 sm:px-5 py-2.5 sm:py-3 text-[13px] sm:text-sm font-bold text-slate-300" data-tab="social" role="tab"><i data-lucide="instagram" class="w-4 h-4"></i> Social Media & Content</button>
+      <button class="tab-btn inline-flex items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/60 px-4 sm:px-5 py-2.5 sm:py-3 text-[13px] sm:text-sm font-bold text-slate-300" data-tab="seo" role="tab"><i data-lucide="trending-up" class="w-4 h-4"></i> SEO & Digital Ads</button>
+    </div>
+
+    <!-- PANEL: WEB -->
+    <div id="panel-web" class="tab-panel active grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mt-8" role="tabpanel">
+      <!-- Card 1 -->
+      <div class="card-hover glass rounded-3xl p-6 sm:p-7 flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-indigo-300 bg-indigo-500/12 border border-indigo-400/25 rounded-full px-3 py-1"><i data-lucide="user" class="w-3 h-3"></i> Portfolio</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 24–48 Hrs</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">Personal Portfolio / Resume Website</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹1,000 – ₹1,500</p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Single-page responsive layout</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Project showcase + resume download button</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Contact form setup</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Mobile-first, shareable link ready</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('Personal Portfolio / Resume Website — ₹1,000–₹1,500')" class="btn-primary flex-1 inline-flex items-center justify-center gap-2 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I'm%20interested%20in%20the%20Personal%20Portfolio%20Website%20(₹1,000–₹1,500)." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+      <!-- Card 2 (popular) -->
+      <div class="card-hover relative glass gradient-border rounded-3xl p-6 sm:p-7 flex flex-col !bg-slate-900/70 shadow-xl shadow-indigo-950/50">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 gradient-bg text-white text-[11px] font-extrabold uppercase tracking-wider rounded-full px-4 py-1.5 shadow-lg whitespace-nowrap">Most Popular</span>
+        <div class="flex items-center justify-between mb-4 mt-1">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-cyan-300 bg-cyan-500/10 border border-cyan-400/25 rounded-full px-3 py-1"><i data-lucide="building-2" class="w-3 h-3"></i> Business</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 3–5 Days</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">Business Showcase Website</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹2,500 – ₹4,000</p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Multi-page layout (Home, About, Services, Contact)</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Custom branding & mobile optimization</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Basic SEO meta tags included</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> WhatsApp chat button + map embed</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('Business Showcase Website — ₹2,500–₹4,000')" class="btn-primary flex-1 inline-flex items-center justify-center gap-2 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I'm%20interested%20in%20the%20Business%20Showcase%20Website%20(₹2,500–₹4,000)." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="card-hover glass rounded-3xl p-6 sm:p-7 flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-fuchsia-300 bg-fuchsia-500/10 border border-fuchsia-400/25 rounded-full px-3 py-1"><i data-lucide="shopping-cart" class="w-3 h-3"></i> E-Commerce</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 5–7 Days</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">Full E-Commerce Storefront</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹5,000 – ₹8,000</p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Shopify / WooCommerce setup</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Product catalog up to 20 SKUs</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Razorpay / Paytm gateway integration</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Automated order confirmation</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('Full E-Commerce Storefront — ₹5,000–₹8,000')" class="btn-primary flex-1 inline-flex items-center justify-center gap-2 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I'm%20interested%20in%20the%20Full%20E-Commerce%20Storefront%20(₹5,000–₹8,000)." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: MARKETPLACE -->
+    <div id="panel-market" class="tab-panel grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mt-8" role="tabpanel">
+      <div class="card-hover glass rounded-3xl p-6 flex flex-col">
+        <span class="w-11 h-11 rounded-2xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center mb-4"><i data-lucide="package" class="w-5 h-5 text-amber-300"></i></span>
+        <h3 class="font-display font-bold text-white text-[17px] leading-snug">Amazon Seller Onboarding & Setup</h3>
+        <p class="mt-2.5 font-display font-extrabold text-xl gradient-text">₹2,000 – ₹3,500</p>
+        <ul class="mt-4 space-y-2 text-[13px] text-slate-300 flex-1">
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Account creation + GST integration</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> GTIN exemption handling</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Listing up to 10 items</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Keyword-rich product titles</li>
+        </ul>
+        <button onclick="selectService('Amazon Seller Onboarding & Setup — ₹2,000–₹3,500')" class="btn-primary mt-5 w-full text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+      </div>
+      <div class="card-hover glass rounded-3xl p-6 flex flex-col">
+        <span class="w-11 h-11 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center mb-4"><i data-lucide="shopping-bag" class="w-5 h-5 text-sky-300"></i></span>
+        <h3 class="font-display font-bold text-white text-[17px] leading-snug">Flipkart Seller Hub Setup</h3>
+        <p class="mt-2.5 font-display font-extrabold text-xl gradient-text">₹2,000 – ₹3,500</p>
+        <ul class="mt-4 space-y-2 text-[13px] text-slate-300 flex-1">
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Seller registration + verification</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Category approval mapping</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Product cataloging</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Pricing strategy configuration</li>
+        </ul>
+        <button onclick="selectService('Flipkart Seller Hub Setup — ₹2,000–₹3,500')" class="btn-primary mt-5 w-full text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+      </div>
+      <div class="card-hover glass rounded-3xl p-6 flex flex-col">
+        <span class="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center mb-4"><i data-lucide="map-pin" class="w-5 h-5 text-emerald-300"></i></span>
+        <h3 class="font-display font-bold text-white text-[17px] leading-snug">Google Merchant Center & Business Profile</h3>
+        <p class="mt-2.5 font-display font-extrabold text-xl gradient-text">₹1,500 – ₹2,500</p>
+        <ul class="mt-4 space-y-2 text-[13px] text-slate-300 flex-1">
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Google Maps business verification</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Merchant Center product feed sync</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Local search optimization</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Free Shopping visibility setup</li>
+        </ul>
+        <button onclick="selectService('Google Merchant Center & Business Profile — ₹1,500–₹2,500')" class="btn-primary mt-5 w-full text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+      </div>
+      <div class="card-hover relative glass gradient-border rounded-3xl p-6 flex flex-col !bg-slate-900/70 shadow-xl shadow-indigo-950/50">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 gradient-bg text-white text-[10.5px] font-extrabold uppercase tracking-wider rounded-full px-4 py-1.5 shadow-lg whitespace-nowrap">Best Value • Save ₹2,000+</span>
+        <span class="w-11 h-11 rounded-2xl gradient-bg flex items-center justify-center mb-4 mt-1 shadow-lg shadow-indigo-500/30"><i data-lucide="crown" class="w-5 h-5 text-white"></i></span>
+        <h3 class="font-display font-bold text-white text-[17px] leading-snug">Complete All-In-One Marketplace Bundle</h3>
+        <p class="mt-2.5 font-display font-extrabold text-xl gradient-text">₹5,000 <span class="text-xs font-bold text-slate-400">flat • one-time</span></p>
+        <ul class="mt-4 space-y-2 text-[13px] text-slate-300 flex-1">
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-300 mt-0.5 shrink-0"></i> Amazon + Flipkart + Google combined</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-300 mt-0.5 shrink-0"></i> End-to-end onboarding handled</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-300 mt-0.5 shrink-0"></i> Unified catalog + pricing setup</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-cyan-300 mt-0.5 shrink-0"></i> Priority support till first order</li>
+        </ul>
+        <button onclick="selectService('Complete All-In-One Marketplace Bundle — ₹5,000 flat')" class="btn-primary mt-5 w-full text-sm font-bold text-white rounded-xl px-4 py-3">Claim Bundle</button>
+      </div>
+    </div>
+
+    <!-- PANEL: SOCIAL -->
+    <div id="panel-social" class="tab-panel grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mt-8" role="tabpanel">
+      <div class="card-hover glass rounded-3xl p-6 sm:p-7 flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-pink-300 bg-pink-500/10 border border-pink-400/25 rounded-full px-3 py-1"><i data-lucide="party-popper" class="w-3 h-3"></i> Fest Special</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 24–48 Hrs</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">Fest / Event Promo Content Pack</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹1,000 – ₹1,500</p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> 5 customized promotional posts</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> 3 Instagram story graphics</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> High-converting captions + hashtags</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Perfect for college fests & launches</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('Fest / Event Promo Content Pack — ₹1,000–₹1,500')" class="btn-primary flex-1 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20need%20a%20Fest%20Promo%20Content%20Pack%20(₹1,000–₹1,500)." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+      <div class="card-hover glass rounded-3xl p-6 sm:p-7 flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-indigo-300 bg-indigo-500/10 border border-indigo-400/25 rounded-full px-3 py-1"><i data-lucide="calendar" class="w-3 h-3"></i> Starter / mo</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="repeat" class="w-3.5 h-3.5"></i> Monthly</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">Monthly Social Media Starter Retainer</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹2,000 – ₹3,500<span class="text-sm font-bold text-slate-400">/mo</span></p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> 8 customized posts / month</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Profile optimization + hashtag strategy</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Scheduling via Meta Business Suite</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Monthly performance summary</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('Monthly Social Media Starter Retainer — ₹2,000–₹3,500/mo')" class="btn-primary flex-1 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I'm%20interested%20in%20the%20Monthly%20Starter%20Retainer." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+      <div class="card-hover relative glass gradient-border rounded-3xl p-6 sm:p-7 flex flex-col !bg-slate-900/70 shadow-xl shadow-indigo-950/50">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 gradient-bg text-white text-[11px] font-extrabold uppercase tracking-wider rounded-full px-4 py-1.5 shadow-lg whitespace-nowrap">Best for Growth</span>
+        <div class="flex items-center justify-between mb-4 mt-1">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-cyan-300 bg-cyan-500/10 border border-cyan-400/25 rounded-full px-3 py-1"><i data-lucide="flame" class="w-3 h-3"></i> Growth / mo</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="repeat" class="w-3.5 h-3.5"></i> Monthly</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">Monthly Growth Content Retainer</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹4,000 – ₹6,000<span class="text-sm font-bold text-slate-400">/mo</span></p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> 12 posts / month + 4 reels</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Reel editing (CapCut / VN)</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Comment + DM community management</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Growth strategy + trend-jacking</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('Monthly Growth Content Retainer — ₹4,000–₹6,000/mo')" class="btn-primary flex-1 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I'm%20interested%20in%20the%20Monthly%20Growth%20Retainer." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: SEO -->
+    <div id="panel-seo" class="tab-panel grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mt-8" role="tabpanel">
+      <div class="card-hover glass rounded-3xl p-6 sm:p-7 flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-300 bg-emerald-500/10 border border-emerald-400/25 rounded-full px-3 py-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Local SEO</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 48 Hrs</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">Google Business Profile (Local SEO)</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹1,000 <span class="text-xs font-bold text-slate-400">flat</span></p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Full profile optimization + category tagging</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Review link + QR code creation</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Google Maps ranking boost</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Photos, hours & services setup</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('Google Business Profile Local SEO — ₹1,000')" class="btn-primary flex-1 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20want%20the%20Google%20Business%20Profile%20setup%20(₹1,000)." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+      <div class="card-hover glass rounded-3xl p-6 sm:p-7 flex flex-col">
+        <div class="flex items-center justify-between mb-4">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-indigo-300 bg-indigo-500/10 border border-indigo-400/25 rounded-full px-3 py-1"><i data-lucide="search" class="w-3 h-3"></i> On-Page SEO</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 3–4 Days</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">On-Page SEO Audit & Optimization</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹1,500 – ₹2,500</p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Meta title / description optimization</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Image compression + alt-text setup</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Google Search Console indexing</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Full audit report with fix list</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('On-Page SEO Audit & Optimization — ₹1,500–₹2,500')" class="btn-primary flex-1 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20want%20an%20On-Page%20SEO%20Audit%20(₹1,500–₹2,500)." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+      <div class="card-hover relative glass gradient-border rounded-3xl p-6 sm:p-7 flex flex-col !bg-slate-900/70 shadow-xl shadow-indigo-950/50 md:col-span-2 lg:col-span-1">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 gradient-bg text-white text-[11px] font-extrabold uppercase tracking-wider rounded-full px-4 py-1.5 shadow-lg whitespace-nowrap">High ROI</span>
+        <div class="flex items-center justify-between mb-4 mt-1">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-300 bg-amber-500/10 border border-amber-400/25 rounded-full px-3 py-1"><i data-lucide="target" class="w-3 h-3"></i> Paid Ads</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 2–3 Days</span>
+        </div>
+        <h3 class="font-display font-bold text-white text-xl leading-snug">Paid Ad Campaign Setup (Meta / Google)</h3>
+        <p class="mt-3 font-display font-extrabold text-2xl gradient-text">₹2,000 – ₹3,500</p>
+        <ul class="mt-5 space-y-2.5 text-[13.5px] text-slate-300 flex-1">
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Target audience + pixel integration</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Ad graphic / creative creation</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Full campaign structure setup</li>
+          <li class="flex gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> Launch checklist + tracking test</li>
+        </ul>
+        <div class="mt-6 flex gap-2.5">
+          <button onclick="selectService('Paid Ad Campaign Setup Meta/Google — ₹2,000–₹3,500')" class="btn-primary flex-1 text-sm font-bold text-white rounded-xl px-4 py-3">Get This Pack</button>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20want%20a%20Paid%20Ad%20Campaign%20Setup%20(₹2,000–₹3,500)." target="_blank" rel="noopener" aria-label="WhatsApp" class="w-12 shrink-0 inline-flex items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing note -->
+    <div class="reveal mt-8 glass rounded-2xl px-5 py-4 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 text-center">
+      <p class="text-[13.5px] text-slate-300 flex items-center gap-2 flex-wrap justify-center">
+        <i data-lucide="info" class="w-4 h-4 text-cyan-300 shrink-0"></i>
+        <span>All prices are <span class="font-bold text-white">fixed one-time fees</span> (except monthly retainers). <span class="font-bold text-white">50% advance</span> to start, <span class="font-bold text-white">50% on handover</span>. Domain/hosting billed at actuals.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 5. PROCESS ═══════════ -->
+<section id="process" class="relative py-16 sm:py-20 lg:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.18em] text-cyan-300 bg-cyan-400/10 border border-cyan-400/20 rounded-full px-4 py-1.5 mb-4"><i data-lucide="workflow" class="w-3.5 h-3.5"></i> How it works</p>
+      <h2 class="font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-[44px] tracking-tight leading-tight">From first call to launch in <span class="gradient-text">4 simple steps.</span></h2>
+      <p class="mt-4 text-slate-400 text-[15px] sm:text-base">A battle-tested pipeline that keeps you updated at every stage — no chasing, no confusion.</p>
+    </div>
+
+    <div class="relative mt-12">
+      <div class="hidden lg:block absolute top-[52px] left-[12%] right-[12%] h-[2px] step-line rounded-full"></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div class="reveal card-hover glass rounded-3xl p-6 sm:p-7 text-center relative">
+          <span class="relative z-10 mx-auto w-[72px] h-[72px] rounded-3xl gradient-bg flex items-center justify-center shadow-xl shadow-indigo-500/30 mb-5"><i data-lucide="phone-call" class="w-7 h-7 text-white"></i><span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-slate-950 border border-indigo-400/50 text-[12px] font-extrabold text-cyan-300 flex items-center justify-center">1</span></span>
+          <h3 class="font-display font-bold text-white text-lg">Discovery Call</h3>
+          <p class="mt-2 text-sm text-slate-400 leading-relaxed">A quick 15-min WhatsApp / phone chat to understand your goal, audience & deadline.</p>
+          <p class="mt-3 inline-flex items-center gap-1.5 text-[12px] font-bold text-indigo-300 bg-indigo-500/10 rounded-full px-3 py-1"><i data-lucide="timer" class="w-3 h-3"></i> Same-day response</p>
+        </div>
+        <div class="reveal reveal-delay-1 card-hover glass rounded-3xl p-6 sm:p-7 text-center relative">
+          <span class="relative z-10 mx-auto w-[72px] h-[72px] rounded-3xl bg-gradient-to-br from-cyan-500 to-sky-700 flex items-center justify-center shadow-xl shadow-cyan-500/30 mb-5"><i data-lucide="file-text" class="w-7 h-7 text-white"></i><span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-slate-950 border border-cyan-400/50 text-[12px] font-extrabold text-cyan-300 flex items-center justify-center">2</span></span>
+          <h3 class="font-display font-bold text-white text-lg">Strategy & Quote</h3>
+          <p class="mt-2 text-sm text-slate-400 leading-relaxed">Fixed quote + clear scope doc. Pay 50% advance to lock your slot & kick off.</p>
+          <p class="mt-3 inline-flex items-center gap-1.5 text-[12px] font-bold text-cyan-300 bg-cyan-500/10 rounded-full px-3 py-1"><i data-lucide="receipt" class="w-3 h-3"></i> Fixed quote in 24 hrs</p>
+        </div>
+        <div class="reveal reveal-delay-2 card-hover glass rounded-3xl p-6 sm:p-7 text-center relative">
+          <span class="relative z-10 mx-auto w-[72px] h-[72px] rounded-3xl bg-gradient-to-br from-fuchsia-500 to-purple-700 flex items-center justify-center shadow-xl shadow-fuchsia-500/30 mb-5"><i data-lucide="code-2" class="w-7 h-7 text-white"></i><span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-slate-950 border border-fuchsia-400/50 text-[12px] font-extrabold text-cyan-300 flex items-center justify-center">3</span></span>
+          <h3 class="font-display font-bold text-white text-lg">Fast Execution</h3>
+          <p class="mt-2 text-sm text-slate-400 leading-relaxed">We build, design & set up with daily progress updates on WhatsApp. You review live.</p>
+          <p class="mt-3 inline-flex items-center gap-1.5 text-[12px] font-bold text-fuchsia-300 bg-fuchsia-500/10 rounded-full px-3 py-1"><i data-lucide="zap" class="w-3 h-3"></i> Daily updates</p>
+        </div>
+        <div class="reveal reveal-delay-3 card-hover glass rounded-3xl p-6 sm:p-7 text-center relative">
+          <span class="relative z-10 mx-auto w-[72px] h-[72px] rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center shadow-xl shadow-emerald-500/30 mb-5"><i data-lucide="rocket" class="w-7 h-7 text-white"></i><span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-slate-950 border border-emerald-400/50 text-[12px] font-extrabold text-cyan-300 flex items-center justify-center">4</span></span>
+          <h3 class="font-display font-bold text-white text-lg">Launch & Handover</h3>
+          <p class="mt-2 text-sm text-slate-400 leading-relaxed">Final review, balance 50% payment, full handover with logins, files & support.</p>
+          <p class="mt-3 inline-flex items-center gap-1.5 text-[12px] font-bold text-emerald-300 bg-emerald-500/10 rounded-full px-3 py-1"><i data-lucide="badge-check" class="w-3 h-3"></i> 7-day free support</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="mt-14 grid md:grid-cols-3 gap-4 sm:gap-5">
+      <div class="reveal glass rounded-3xl p-6">
+        <div class="flex gap-1 mb-3">
+          <i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+        </div>
+        <p class="text-[14px] text-slate-300 leading-relaxed">"Got my portfolio site in 36 hours flat. Clean design, resume button, contact form — everything working. Best ₹1,500 I've spent."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center font-extrabold text-white text-sm">AR</span>
+          <div><p class="text-white text-sm font-bold">Aarav R.</p><p class="text-slate-500 text-xs">B.Tech Student • Portfolio Site</p></div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1 glass rounded-3xl p-6">
+        <div class="flex gap-1 mb-3">
+          <i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+        </div>
+        <p class="text-[14px] text-slate-300 leading-relaxed">"DigiBro onboarded us on Amazon + Flipkart in one week. Listings, GST, pricing — zero headache. First order came within 10 days."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center font-extrabold text-white text-sm">SK</span>
+          <div><p class="text-white text-sm font-bold">Sneha K.</p><p class="text-slate-500 text-xs">D2C Seller • Marketplace Bundle</p></div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2 glass rounded-3xl p-6">
+        <div class="flex gap-1 mb-3">
+          <i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+        </div>
+        <p class="text-[14px] text-slate-300 leading-relaxed">"Our college fest promotions looked straight-up professional. 5 posts + stories + captions delivered overnight. Reach doubled vs last year."</p>
+        <div class="mt-4 flex items-center gap-3">
+          <span class="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-500 to-pink-600 flex items-center justify-center font-extrabold text-white text-sm">RC</span>
+          <div><p class="text-white text-sm font-bold">Rohan C.</p><p class="text-slate-500 text-xs">Fest Coordinator • Promo Pack</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 6. FAQ ═══════════ -->
+<section id="faq" class="relative py-16 sm:py-20 lg:py-24 bg-slate-950/60 border-y border-slate-800/60">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center reveal">
+      <p class="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.18em] text-indigo-300 bg-indigo-500/10 border border-indigo-400/20 rounded-full px-4 py-1.5 mb-4"><i data-lucide="help-circle" class="w-3.5 h-3.5"></i> FAQs</p>
+      <h2 class="font-display font-extrabold text-white text-3xl sm:text-4xl tracking-tight">Questions? <span class="gradient-text">Answered.</span></h2>
+      <p class="mt-3 text-slate-400 text-[15px]">Everything about payments, revisions, hosting & timelines.</p>
+    </div>
+    <div class="mt-8 space-y-3">
+      <div class="faq-item reveal glass rounded-2xl border border-slate-800/80 transition-all">
+        <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5">
+          <span class="font-bold text-white text-[15px] sm:text-base">How do payments work? Is my money safe?</span>
+          <span class="faq-chevron shrink-0 w-8 h-8 rounded-full bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center"><i data-lucide="chevron-down" class="w-4 h-4 text-indigo-300"></i></span>
+        </button>
+        <div class="faq-answer"><p class="px-5 sm:px-6 pb-5 text-sm text-slate-400 leading-relaxed">Simple milestone model: <span class="text-slate-200 font-semibold">50% advance</span> to start your project, and the remaining <span class="text-slate-200 font-semibold">50% only on final handover</span> after your approval. We accept UPI, bank transfer and all major payment methods. You get a written scope + receipt for every payment.</p></div>
+      </div>
+      <div class="faq-item reveal glass rounded-2xl border border-slate-800/80 transition-all">
+        <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5">
+          <span class="font-bold text-white text-[15px] sm:text-base">How fast can you deliver my project?</span>
+          <span class="faq-chevron shrink-0 w-8 h-8 rounded-full bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center"><i data-lucide="chevron-down" class="w-4 h-4 text-indigo-300"></i></span>
+        </button>
+        <div class="faq-answer"><p class="px-5 sm:px-6 pb-5 text-sm text-slate-400 leading-relaxed">Portfolio sites & fest packs: <span class="text-slate-200 font-semibold">24–48 hours</span>. Business websites: <span class="text-slate-200 font-semibold">3–5 days</span>. E-commerce stores: <span class="text-slate-200 font-semibold">5–7 days</span>. Marketplace onboarding: <span class="text-slate-200 font-semibold">3–7 days</span> (subject to platform verification). Express delivery slots are available on request.</p></div>
+      </div>
+      <div class="faq-item reveal glass rounded-2xl border border-slate-800/80 transition-all">
+        <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5">
+          <span class="font-bold text-white text-[15px] sm:text-base">Do you offer revisions if I don't like something?</span>
+          <span class="faq-chevron shrink-0 w-8 h-8 rounded-full bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center"><i data-lucide="chevron-down" class="w-4 h-4 text-indigo-300"></i></span>
+        </button>
+        <div class="faq-answer"><p class="px-5 sm:px-6 pb-5 text-sm text-slate-400 leading-relaxed">Yes. Every package includes <span class="text-slate-200 font-semibold">2 free revision rounds</span> (design tweaks, text changes, layout adjustments). Major scope changes after approval are quoted separately at student-friendly rates — always confirmed with you before we proceed.</p></div>
+      </div>
+      <div class="faq-item reveal glass rounded-2xl border border-slate-800/80 transition-all">
+        <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5">
+          <span class="font-bold text-white text-[15px] sm:text-base">Are domain & hosting charges included in website pricing?</span>
+          <span class="faq-chevron shrink-0 w-8 h-8 rounded-full bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center"><i data-lucide="chevron-down" class="w-4 h-4 text-indigo-300"></i></span>
+        </button>
+        <div class="faq-answer"><p class="px-5 sm:px-6 pb-5 text-sm text-slate-400 leading-relaxed">Our pricing covers <span class="text-slate-200 font-semibold">design + development + setup</span>. Domain (~₹800–1,200/year) and hosting (~₹2,000–4,000/year) are billed at actuals — you pay the provider directly and <span class="text-slate-200 font-semibold">own everything 100%</span>. We'll recommend the cheapest reliable option and set it all up for you free.</p></div>
+      </div>
+      <div class="faq-item reveal glass rounded-2xl border border-slate-800/80 transition-all">
+        <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5">
+          <span class="font-bold text-white text-[15px] sm:text-base">Do I need GST to sell on Amazon / Flipkart?</span>
+          <span class="faq-chevron shrink-0 w-8 h-8 rounded-full bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center"><i data-lucide="chevron-down" class="w-4 h-4 text-indigo-300"></i></span>
+        </button>
+        <div class="faq-answer"><p class="px-5 sm:px-6 pb-5 text-sm text-slate-400 leading-relaxed">For most categories, yes — Amazon & Flipkart require GST. We help you with <span class="text-slate-200 font-semibold">GST integration, GTIN exemption</span> (for unbranded/handmade products) and category approvals as part of the onboarding package. For books & select categories, workarounds exist — ask us on WhatsApp and we'll guide you free.</p></div>
+      </div>
+      <div class="faq-item reveal glass rounded-2xl border border-slate-800/80 transition-all">
+        <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5">
+          <span class="font-bold text-white text-[15px] sm:text-base">What do you need from me to get started?</span>
+          <span class="faq-chevron shrink-0 w-8 h-8 rounded-full bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center"><i data-lucide="chevron-down" class="w-4 h-4 text-indigo-300"></i></span>
+        </button>
+        <div class="faq-answer"><p class="px-5 sm:px-6 pb-5 text-sm text-slate-400 leading-relaxed">Just the basics: your <span class="text-slate-200 font-semibold">logo/photos/content</span> (or rough ideas — we can create them), your <span class="text-slate-200 font-semibold">login details</span> for existing accounts (shared securely), and the <span class="text-slate-200 font-semibold">50% advance</span>. We send you a simple checklist so nothing is missed. Most clients kick off within a day.</p></div>
+      </div>
+      <div class="faq-item reveal glass rounded-2xl border border-slate-800/80 transition-all">
+        <button class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 sm:px-6 py-4 sm:py-5">
+          <span class="font-bold text-white text-[15px] sm:text-base">Do you provide support after project delivery?</span>
+          <span class="faq-chevron shrink-0 w-8 h-8 rounded-full bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center"><i data-lucide="chevron-down" class="w-4 h-4 text-indigo-300"></i></span>
+        </button>
+        <div class="faq-answer"><p class="px-5 sm:px-6 pb-5 text-sm text-slate-400 leading-relaxed">Absolutely. Every project includes <span class="text-slate-200 font-semibold">7 days of free post-launch support</span> (bug fixes, small tweaks, guidance). Monthly retainers include ongoing support. Affordable maintenance plans are available if you want us on standby long-term.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 7. CONTACT ═══════════ -->
+<section id="contact" class="relative py-16 sm:py-20 lg:py-24 overflow-hidden noise">
+  <div class="orb w-[440px] h-[440px] bg-indigo-600/35 top-[-140px] left-1/2 -translate-x-1/2"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.18em] text-emerald-300 bg-emerald-500/10 border border-emerald-400/20 rounded-full px-4 py-1.5 mb-4"><i data-lucide="send" class="w-3.5 h-3.5"></i> Get a free quote</p>
+      <h2 class="font-display font-extrabold text-white text-3xl sm:text-4xl lg:text-[44px] tracking-tight leading-tight">Tell us your idea.<br /><span class="gradient-text">Get a quote within 24 hours.</span></h2>
+      <p class="mt-4 text-slate-400 text-[15px] sm:text-base">Fill the form and we'll ping you on WhatsApp — or just reach out directly. No spam, no pressure.</p>
+    </div>
+
+    <div class="mt-10 grid lg:grid-cols-5 gap-5 lg:gap-6 items-start">
+      <!-- Form -->
+      <div class="reveal lg:col-span-3 glass gradient-border rounded-3xl p-6 sm:p-8 !bg-slate-900/70">
+        <form id="leadForm" class="grid sm:grid-cols-2 gap-4" novalidate>
+          <div>
+            <label for="fName" class="block text-[13px] font-bold text-slate-300 mb-2">Your Name *</label>
+            <input id="fName" name="name" type="text" placeholder="e.g. Priya Sharma" class="w-full bg-slate-800/60 border border-slate-700/70 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-slate-500 transition" />
+          </div>
+          <div>
+            <label for="fPhone" class="block text-[13px] font-bold text-slate-300 mb-2">Phone / WhatsApp *</label>
+            <input id="fPhone" name="phone" type="tel" placeholder="e.g. 98765 43210" class="w-full bg-slate-800/60 border border-slate-700/70 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-slate-500 transition" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="fEmail" class="block text-[13px] font-bold text-slate-300 mb-2">Email Address *</label>
+            <input id="fEmail" name="email" type="email" placeholder="you@example.com" class="w-full bg-slate-800/60 border border-slate-700/70 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-slate-500 transition" />
+          </div>
+          <div>
+            <label for="fService" class="block text-[13px] font-bold text-slate-300 mb-2">Service Needed *</label>
+            <select id="fService" name="service" class="w-full bg-slate-800/60 border border-slate-700/70 rounded-xl px-4 py-3.5 text-sm text-white transition">
+              <option value="">Select a service…</option>
+              <optgroup label="Web & E-Commerce">
+                <option>Personal Portfolio / Resume Website — ₹1,000–₹1,500</option>
+                <option>Business Showcase Website — ₹2,500–₹4,000</option>
+                <option>Full E-Commerce Storefront — ₹5,000–₹8,000</option>
+              </optgroup>
+              <optgroup label="Marketplace">
+                <option>Amazon Seller Onboarding & Setup — ₹2,000–₹3,500</option>
+                <option>Flipkart Seller Hub Setup — ₹2,000–₹3,500</option>
+                <option>Google Merchant Center & Business Profile — ₹1,500–₹2,500</option>
+                <option>Complete All-In-One Marketplace Bundle — ₹5,000 flat</option>
+              </optgroup>
+              <optgroup label="Social Media">
+                <option>Fest / Event Promo Content Pack — ₹1,000–₹1,500</option>
+                <option>Monthly Social Media Starter Retainer — ₹2,000–₹3,500/mo</option>
+                <option>Monthly Growth Content Retainer — ₹4,000–₹6,000/mo</option>
+              </optgroup>
+              <optgroup label="SEO & Ads">
+                <option>Google Business Profile Local SEO — ₹1,000</option>
+                <option>On-Page SEO Audit & Optimization — ₹1,500–₹2,500</option>
+                <option>Paid Ad Campaign Setup Meta/Google — ₹2,000–₹3,500</option>
+              </optgroup>
+              <option>Custom / Multiple Services (Combo)</option>
+            </select>
+          </div>
+          <div>
+            <label for="fBudget" class="block text-[13px] font-bold text-slate-300 mb-2">Your Budget</label>
+            <select id="fBudget" name="budget" class="w-full bg-slate-800/60 border border-slate-700/70 rounded-xl px-4 py-3.5 text-sm text-white transition">
+              <option value="">Select budget range…</option>
+              <option>Under ₹1,500</option>
+              <option>₹1,500 – ₹3,000</option>
+              <option>₹3,000 – ₹5,000</option>
+              <option>₹5,000 – ₹8,000</option>
+              <option>₹8,000+ / Monthly retainer</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="fDetails" class="block text-[13px] font-bold text-slate-300 mb-2">Project Details</label>
+            <textarea id="fDetails" name="details" rows="4" placeholder="Tell us about your business, goal, deadline… (e.g. I need a 4-page website for my bakery in Delhi, launch before next month.)" class="w-full bg-slate-800/60 border border-slate-700/70 rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-slate-500 transition resize-none"></textarea>
+          </div>
+          <p id="formError" class="sm:col-span-2 hidden text-[13px] font-semibold text-rose-300 bg-rose-500/10 border border-rose-400/25 rounded-xl px-4 py-3"></p>
+          <div class="sm:col-span-2 grid sm:grid-cols-2 gap-3">
+            <button type="submit" class="btn-whatsapp inline-flex items-center justify-center gap-2 font-bold text-white rounded-2xl px-6 py-4 text-[15px]">
+              <i data-lucide="message-circle" class="w-5 h-5"></i> Send via WhatsApp
+            </button>
+            <button type="button" id="emailBtn" class="inline-flex items-center justify-center gap-2 font-bold text-white rounded-2xl px-6 py-4 text-[15px] border border-slate-600/80 bg-slate-800/50 hover:border-indigo-400/60 hover:bg-slate-800 transition-all">
+              <i data-lucide="mail" class="w-5 h-5 text-indigo-300"></i> Send via Email
+            </button>
+          </div>
+          <p class="sm:col-span-2 text-center text-[12px] text-slate-500 flex items-center justify-center gap-1.5"><i data-lucide="lock" class="w-3.5 h-3.5"></i> Your details stay private. We reply within 24 hours — usually much faster.</p>
+        </form>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="reveal reveal-delay-1 lg:col-span-2 space-y-4">
+        <div class="glass rounded-3xl p-6 sm:p-7">
+          <h3 class="font-display font-bold text-white text-lg flex items-center gap-2"><span class="w-8 h-8 rounded-xl gradient-bg flex items-center justify-center"><i data-lucide="headset" class="w-4 h-4 text-white"></i></span> Talk to us directly</h3>
+          <div class="mt-5 space-y-3">
+            <a href="tel:+918178903816" class="flex items-center gap-4 bg-slate-800/50 border border-slate-700/50 hover:border-emerald-400/40 rounded-2xl p-4 transition group">
+              <span class="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center shrink-0"><i data-lucide="phone" class="w-5 h-5 text-emerald-300"></i></span>
+              <div class="min-w-0"><p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Call / WhatsApp</p><p class="text-white font-bold text-[15px] group-hover:text-emerald-300 transition">+91 81789 03816</p></div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 ml-auto group-hover:text-emerald-300 transition"></i>
+            </a>
+            <a href="mailto:digibro360@gmail.com?subject=Project%20Enquiry%20—%20DigiBro" class="flex items-center gap-4 bg-slate-800/50 border border-slate-700/50 hover:border-indigo-400/40 rounded-2xl p-4 transition group">
+              <span class="w-11 h-11 rounded-2xl bg-indigo-500/15 border border-indigo-400/25 flex items-center justify-center shrink-0"><i data-lucide="mail" class="w-5 h-5 text-indigo-300"></i></span>
+              <div class="min-w-0"><p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Email us</p><p class="text-white font-bold text-[15px] truncate group-hover:text-indigo-300 transition">digibro360@gmail.com</p></div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 ml-auto group-hover:text-indigo-300 transition shrink-0"></i>
+            </a>
+            <a href="https://instagram.com/digibro360" target="_blank" rel="noopener" class="flex items-center gap-4 bg-slate-800/50 border border-slate-700/50 hover:border-pink-400/40 rounded-2xl p-4 transition group">
+              <span class="w-11 h-11 rounded-2xl bg-pink-500/15 border border-pink-400/25 flex items-center justify-center shrink-0"><i data-lucide="instagram" class="w-5 h-5 text-pink-300"></i></span>
+              <div class="min-w-0"><p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Instagram</p><p class="text-white font-bold text-[15px] group-hover:text-pink-300 transition">@digibro360</p></div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-600 ml-auto group-hover:text-pink-300 transition"></i>
+            </a>
+          </div>
+          <div class="mt-5 flex items-center gap-2.5 bg-emerald-500/10 border border-emerald-400/20 rounded-2xl px-4 py-3">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+            <p class="text-[13px] text-slate-300"><span class="font-bold text-emerald-300">Online now</span> — avg. reply time under 2 hours (9 AM – 11 PM IST)</p>
+          </div>
+        </div>
+        <div class="gradient-bg rounded-3xl p-6 sm:p-7 relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
+          <i data-lucide="badge-percent" class="w-8 h-8 text-white/90 mb-3"></i>
+          <h3 class="font-display font-extrabold text-white text-xl leading-snug">Need 2+ services?<br />Unlock a combo discount.</h3>
+          <p class="mt-2 text-indigo-100 text-sm leading-relaxed">Website + SEO, Store + Marketplace, Content + Ads — bundle up and save up to 20%.</p>
+          <a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20need%20multiple%20services.%20Please%20share%20a%20combo%20quote." target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 bg-white text-indigo-700 font-extrabold text-sm rounded-xl px-5 py-3 hover:bg-indigo-50 transition">Get Combo Quote <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 8. FOOTER ═══════════ -->
+<footer class="border-t border-slate-800/80 bg-slate-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="#home" class="flex items-center gap-2.5">
+          <span class="relative flex items-center justify-center w-9 h-9 rounded-xl gradient-bg shadow-lg shadow-indigo-500/30">
+            <i data-lucide="terminal" class="w-5 h-5 text-white"></i>
+            <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-cyan-400 border-2 border-slate-950"></span>
+          </span>
+          <span class="font-display font-extrabold text-xl text-white">Digi<span class="gradient-text">Bro</span></span>
+        </a>
+        <p class="mt-4 text-sm text-slate-400 leading-relaxed max-w-xs">Student-led digital agency helping startups, sellers & creators launch and grow online — fast, affordable, zero-headache.</p>
+        <div class="mt-5 flex items-center gap-2.5">
+          <a href="https://instagram.com/digibro360" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-slate-300 hover:text-pink-300 hover:border-pink-400/40 transition"><i data-lucide="instagram" class="w-4.5 h-4.5"></i></a>
+          <a href="https://wa.me/918178903816" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-slate-300 hover:text-emerald-300 hover:border-emerald-400/40 transition"><i data-lucide="message-circle" class="w-4.5 h-4.5"></i></a>
+          <a href="mailto:digibro360@gmail.com" aria-label="Email" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-slate-300 hover:text-indigo-300 hover:border-indigo-400/40 transition"><i data-lucide="mail" class="w-4.5 h-4.5"></i></a>
+          <a href="tel:+918178903816" aria-label="Phone" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-slate-300 hover:text-cyan-300 hover:border-cyan-400/40 transition"><i data-lucide="phone" class="w-4.5 h-4.5"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+        <ul class="space-y-2.5 text-sm text-slate-400">
+          <li><a href="#home" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> Home</a></li>
+          <li><a href="#services" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> Services</a></li>
+          <li><a href="#pricing" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> Pricing</a></li>
+          <li><a href="#process" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> Process</a></li>
+          <li><a href="#faq" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Top Services</h4>
+        <ul class="space-y-2.5 text-sm text-slate-400">
+          <li><a href="#pricing" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> Portfolio Websites ₹1,000+</a></li>
+          <li><a href="#pricing" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> E-Commerce Stores ₹5,000+</a></li>
+          <li><a href="#pricing" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> Marketplace Bundle ₹5,000</a></li>
+          <li><a href="#pricing" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> Fest Promo Packs ₹1,000+</a></li>
+          <li><a href="#pricing" class="hover:text-cyan-300 transition inline-flex items-center gap-2"><i data-lucide="chevron-right" class="w-3.5 h-3.5"></i> Local SEO ₹1,000</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Contact</h4>
+        <ul class="space-y-3 text-sm text-slate-400">
+          <li class="flex items-start gap-2.5"><i data-lucide="phone" class="w-4 h-4 text-emerald-400 mt-0.5 shrink-0"></i> <a href="tel:+918178903816" class="hover:text-white transition">+91 81789 03816</a></li>
+          <li class="flex items-start gap-2.5"><i data-lucide="mail" class="w-4 h-4 text-indigo-400 mt-0.5 shrink-0"></i> <a href="mailto:digibro360@gmail.com" class="hover:text-white transition break-all">digibro360@gmail.com</a></li>
+          <li class="flex items-start gap-2.5"><i data-lucide="instagram" class="w-4 h-4 text-pink-400 mt-0.5 shrink-0"></i> <a href="https://instagram.com/digibro360" target="_blank" rel="noopener" class="hover:text-white transition">@digibro360</a></li>
+          <li class="flex items-start gap-2.5"><i data-lucide="map-pin" class="w-4 h-4 text-cyan-400 mt-0.5 shrink-0"></i> India • Serving clients worldwide</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-10 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-slate-500">
+      <p>© <span id="year">2026</span> DigiBro. All rights reserved. Crafted with hustle in India.</p>
+      <p class="inline-flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500"></i> 50% milestone-protected payments • Fixed pricing, zero hidden costs</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/918178903816?text=Hi%20DigiBro!%20I%20have%20a%20quick%20question%20about%20your%20services." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
+   class="whatsapp-pulse fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 group flex items-center gap-0 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full p-1 pr-1 shadow-2xl hover:pr-5 transition-all duration-300">
+  <span class="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+    <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
+  </span>
+  <span class="max-w-0 overflow-hidden group-hover:max-w-[140px] transition-all duration-300 whitespace-nowrap text-white text-sm font-bold">Quick Chat</span>
+</a>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-24 sm:bottom-8 left-1/2 -translate-x-1/2 translate-y-24 opacity-0 z-[70] glass gradient-border rounded-2xl px-5 py-4 flex items-center gap-3 shadow-2xl max-w-[92vw]">
+  <span class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center shrink-0"><i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-300"></i></span>
+  <p id="toastMsg" class="text-sm font-semibold text-white">Done!</p>
+</div>
+
+<script>
+  // Lucide
+  lucide.createIcons();
+
+  // ── Mobile nav ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+  let menuOpen = false;
+  function toggleMenu(force){
+    menuOpen = force !== undefined ? force : !menuOpen;
+    if(menuOpen){
+      mobileMenu.classList.remove('hidden-menu','opacity-0');
+      iconOpen.classList.add('hidden'); iconClose.classList.remove('hidden');
+    } else {
+      mobileMenu.classList.add('hidden-menu','opacity-0');
+      iconOpen.classList.remove('hidden'); iconClose.classList.add('hidden');
+    }
+  }
+  hamburger.addEventListener('click', () => toggleMenu());
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => toggleMenu(false)));
+
+  // ── Navbar scroll effect ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 24){ navbar.classList.add('shadow-lg','shadow-indigo-950/40'); }
+    else { navbar.classList.remove('shadow-lg','shadow-indigo-950/40'); }
+  }, { passive:true });
+
+  // ── Service tabs ──
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = { web:'panel-web', market:'panel-market', social:'panel-social', seo:'panel-seo' };
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      Object.values(panels).forEach(id => document.getElementById(id).classList.remove('active'));
+      document.getElementById(panels[btn.dataset.tab]).classList.add('active');
+    });
+  });
+
+  // ── FAQ accordion ──
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-toggle').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+  // Open first FAQ by default
+  const firstFaq = document.querySelector('.faq-item');
+  if(firstFaq) firstFaq.classList.add('open');
+
+  // ── Reveal on scroll ──
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+  }, { threshold:0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ── Counters ──
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(!e.isIntersecting) return;
+      const el = e.target, target = +el.dataset.target;
+      let cur = 0; const step = Math.max(1, Math.ceil(target/40));
+      const t = setInterval(() => { cur += step; if(cur >= target){ cur = target; clearInterval(t); } el.textContent = cur; }, 40);
+      counterObs.unobserve(el);
+    });
+  }, { threshold:0.6 });
+  document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+  // ── Active nav link ──
+  const sections = ['home','services','pricing','process','faq','contact'];
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const secObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        navLinks.forEach(l => l.classList.toggle('active', l.dataset.nav === e.target.id));
+      }
+    });
+  }, { rootMargin:'-40% 0px -55% 0px' });
+  sections.forEach(id => { const s = document.getElementById(id); if(s) secObs.observe(s); });
+
+  // ── Toast ──
+  let toastTimer;
+  function showToast(msg){
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    toast.classList.remove('translate-y-24','opacity-0');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.add('translate-y-24','opacity-0'), 3400);
+  }
+
+  // ── Prefill service from pricing cards ──
+  window.selectService = function(serviceName){
+    const sel = document.getElementById('fService');
+    [...sel.options].forEach(o => { if(o.text === serviceName) sel.value = o.value || o.text; });
+    // fallback: match by prefix
+    [...sel.options].forEach(o => { if(serviceName.startsWith(o.text.split('—')[0].trim()) && o.text.length > 3) sel.value = o.value || o.text; });
+    document.getElementById('contact').scrollIntoView({ behavior:'smooth' });
+    showToast('Package selected: ' + serviceName.split('—')[0].trim());
+    setTimeout(() => document.getElementById('fName').focus({ preventScroll:true }), 900);
+  };
+
+  // ── Lead form → WhatsApp / Email ──
+  const form = document.getElementById('leadForm');
+  const formError = document.getElementById('formError');
+  function getFormData(){
+    return {
+      name: document.getElementById('fName').value.trim(),
+      phone: document.getElementById('fPhone').value.trim(),
+      email: document.getElementById('fEmail').value.trim(),
+      service: document.getElementById('fService').value,
+      budget: document.getElementById('fBudget').value || 'Not specified',
+      details: document.getElementById('fDetails').value.trim() || '—'
+    };
+  }
+  function validate(d){
+    if(!d.name){ return 'Please enter your name.'; }
+    if(!d.phone || d.phone.replace(/\D/g,'').length < 10){ return 'Please enter a valid 10-digit phone / WhatsApp number.'; }
+    if(!d.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)){ return 'Please enter a valid email address.'; }
+    if(!d.service){ return 'Please choose a service you need.'; }
+    return null;
+  }
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = getFormData();
+    const err = validate(d);
+    if(err){ formError.textContent = err; formError.classList.remove('hidden'); return; }
+    formError.classList.add('hidden');
+    const msg =
+`Hi DigiBro! New project enquiry:
+--------------------------
+Name: ${d.name}
+Phone: ${d.phone}
+Email: ${d.email}
+Service: ${d.service}
+Budget: ${d.budget}
+Details: ${d.details}
+--------------------------
+Please share a quote. Thanks!`;
+    window.open('https://wa.me/918178903816?text=' + encodeURIComponent(msg), '_blank');
+    showToast('Opening WhatsApp with your enquiry…');
+  });
+  document.getElementById('emailBtn').addEventListener('click', () => {
+    const d = getFormData();
+    const err = validate(d);
+    if(err){ formError.textContent = err; formError.classList.remove('hidden'); return; }
+    formError.classList.add('hidden');
+    const subject = encodeURIComponent('Project Enquiry — ' + d.service.split('—')[0].trim());
+    const body = encodeURIComponent(`Hi DigiBro team,\n\nName: ${d.name}\nPhone: ${d.phone}\nEmail: ${d.email}\nService: ${d.service}\nBudget: ${d.budget}\n\nProject details:\n${d.details}\n\nPlease share a quote. Thanks!`);
+    window.location.href = `mailto:digibro360@gmail.com?subject=${subject}&body=${body}`;
+    showToast('Opening your email app…');
+  });
+
+  // ── Year ──
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
